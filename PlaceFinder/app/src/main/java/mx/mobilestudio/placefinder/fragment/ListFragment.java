@@ -5,16 +5,28 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import mx.mobilestudio.placefinder.R;
+import mx.mobilestudio.placefinder.adapter.ListResultsAdapter;
+import mx.mobilestudio.placefinder.model.Venue;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ListFragment extends Fragment {
+
+
+
+    private List<Venue> venues;
+    private RecyclerView recyclerview;
+    private RecyclerView.LayoutManager layoutManager;
 
 
     public ListFragment() {
@@ -56,7 +68,21 @@ public class ListFragment extends Fragment {
 
         Nota :  En este momento aun no es visible el fragmento
          */
-        return inflater.inflate(R.layout.fragment_list, container, false);
+
+        layoutManager = new LinearLayoutManager(getActivity());
+
+      View viiewRoot =   inflater.inflate(R.layout.fragment_list, container, false);
+        recyclerview =  viiewRoot.findViewById(R.id.recyclerview);
+        recyclerview.setLayoutManager(layoutManager);
+
+        ListResultsAdapter listResultsAdapter = new ListResultsAdapter();
+        listResultsAdapter.setVenues(venues);
+
+
+        recyclerview.setAdapter(listResultsAdapter);
+
+
+        return viiewRoot;
     }
 
     @Override
@@ -73,6 +99,15 @@ public class ListFragment extends Fragment {
          * se ponga en pausa o se remueva el fragmento */
 
         super.onResume();
+    }
+
+
+    public List<Venue> getVenues() {
+        return venues;
+    }
+
+    public void setVenues(List<Venue> venues) {
+        this.venues = venues;
     }
 
 }
