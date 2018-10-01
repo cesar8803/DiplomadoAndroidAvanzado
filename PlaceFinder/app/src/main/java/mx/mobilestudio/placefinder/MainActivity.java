@@ -22,7 +22,7 @@ import com.google.gson.Gson;
 import java.util.List;
 
 import mx.mobilestudio.placefinder.fragment.ListFragment;
-import mx.mobilestudio.placefinder.fragment.MapFragment;
+import mx.mobilestudio.placefinder.fragment.MapFragmentResults;
 import mx.mobilestudio.placefinder.model.ApiFourSquareResponse;
 import mx.mobilestudio.placefinder.model.Venue;
 
@@ -103,9 +103,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case FRAGMENT_MAP_ID:
 
 
-                Fragment mapResultFragment = new MapFragment();
+                Fragment mapResultFragment = new MapFragmentResults();
 
-                ((MapFragment) mapResultFragment).setVenues(venues);
+                ((MapFragmentResults) mapResultFragment).setVenues(venues);
 
                 fragmentTransaction.replace(R.id.main_content_container, mapResultFragment);
 
