@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Eaat</string>
+    <string name="question_book">¿Tienes reservación?</string>
+    <string name="bookFragmentTitle">¿Puedes darnos tus datos?</string>
+    <string name="si">SI</string>
+    <string name="no">NO</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
