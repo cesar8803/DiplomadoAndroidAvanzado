@@ -23,27 +23,116 @@
         android:layout_height="wrap_content"
         android:id="@+id/container"
         android:layout_centerInParent="true"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/si"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="20dp"
-            android:layout_weight="1"
-            android:textSize="22dp"
-            android:text="@string/si" />
 
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:id="@+id/container_name">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/name"
+                android:hint="Nombre"
+                android:maxLines="1"
+                android:inputType="textPersonName"/>
+
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:id="@+id/container_lastname">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lastname"
+                android:hint="Apellido"
+                android:maxLines="1"
+                android:inputType="textPersonName"/>
+
+
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/quantity_container"
+            android:layout_marginBottom="25dp"
+            android:textSize="17sp"
+            android:gravity="center_horizontal"
+            android:id="@+id/quantity_text"
+            android:text="@string/quantityTitle"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/quantity_container"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="24sp"
+                android:id="@+id/less_button"/>
+
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+
+            <Button
+                android:layout_width="60dp"
+                android:text="+"
+                android:textSize="24sp"
+                android:layout_height="wrap_content"
+                android:id="@+id/right_button"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/quantity_container"
+            android:layout_marginBottom="25dp"
+            android:textSize="17sp"
+            android:gravity="center_horizontal"
+            android:id="@+id/fumar_text"
+            android:text="@string/fumarText"/>
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            />
         <Button
-            android:layout_margin="20dp"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:textSize="22dp"
-            android:id="@+id/no"
-            android:layout_weight="1"
-            android:text="@string/no"/>
+            android:layout_width="200dp"
+            android:layout_margin="15dp"
+            android:text="Aceptar"
+            android:textSize="24sp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/accept_button"/>
 
     </LinearLayout>
+
+
 
 
 </RelativeLayout>

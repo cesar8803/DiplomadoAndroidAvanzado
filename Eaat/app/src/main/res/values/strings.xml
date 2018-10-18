@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">Eaat</string>
     <string name="question_book">¿Tienes reservación?</string>
+    <string name="question_wait">¿Deseas esperar?</string>
     <string name="bookFragmentTitle">¿Puedes darnos tus datos?</string>
+    <string name="quantityTitle">¿Cuantas personas?</string>
+    <string name="timeestimated">Tiempo de espera aproximado: </string>
+
+    <string name="fumarText">¿Fumar?</string>
+
     <string name="si">SI</string>
     <string name="no">NO</string>
 
