@@ -42,7 +42,7 @@ public class BookFragment extends Fragment implements View.OnClickListener, OnSu
 
     public BookFragment() {
         // Required empty public constructor
-        databaseReference = FirebaseDatabase.getInstance().getReference("customers");
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
     }
 

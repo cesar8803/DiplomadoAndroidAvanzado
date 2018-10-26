@@ -5,9 +5,15 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import mx.mobilestudio.eaat.fragment.BookFragment;
 import mx.mobilestudio.eaat.fragment.MenuFragment;
@@ -26,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements onFragmentInterac
     public static final int FRAGMENT_MENU =4;
 
 
+    private String token;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +44,17 @@ public class MainActivity extends AppCompatActivity implements onFragmentInterac
         relativeLayout = findViewById(R.id.main_fragment_container);
         fragmentManager = getFragmentManager();
         attachFragment(FRAGMENT_WELCOME);
+
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( MainActivity.this,  new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                token  = FirebaseInstanceId.getInstance().getToken();
+                Log.d("FCM_TOKEN",token);
+                Toast.makeText(MainActivity.this, token,Toast.LENGTH_LONG).show();
+            }
+        });
+
 
     }
 
