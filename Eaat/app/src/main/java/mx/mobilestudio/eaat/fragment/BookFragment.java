@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -18,6 +19,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 import mx.mobilestudio.eaat.MainActivity;
 import mx.mobilestudio.eaat.R;
 import mx.mobilestudio.eaat.interfaces.onFragmentInteractionListener;
@@ -34,6 +39,7 @@ public class BookFragment extends Fragment implements View.OnClickListener, OnSu
     private EditText editText;
     private EditText editTextName;
     private EditText editTextLastName;
+    private Switch switch1;
 
     private DatabaseReference databaseReference;
 
@@ -42,8 +48,9 @@ public class BookFragment extends Fragment implements View.OnClickListener, OnSu
 
     public BookFragment() {
         // Required empty public constructor
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
+        databaseReference = FirebaseDatabase.getInstance().getReference();
     }
 
     @Override
@@ -64,6 +71,8 @@ public class BookFragment extends Fragment implements View.OnClickListener, OnSu
         moreButon = viewRoot.findViewById(R.id.right_button);
         accept_button = viewRoot.findViewById(R.id.accept_button);
         editText = viewRoot.findViewById(R.id.editText);
+
+        switch1 = viewRoot.findViewById(R.id.switch1);
         editText.setText("1");
 
         editTextName = viewRoot.findViewById(R.id.name);
@@ -134,7 +143,9 @@ public class BookFragment extends Fragment implements View.OnClickListener, OnSu
 
         customer.setNumberOfCustomers(intValue);
 
-        customer.setWillSmoke(false);
+
+        boolean ischeck=  switch1.isChecked();
+        customer.setWillSmoke(ischeck);
 
         String customerId = databaseReference.push().getKey();
 
@@ -142,11 +153,66 @@ public class BookFragment extends Fragment implements View.OnClickListener, OnSu
 
         databaseReference.child("customers").child(customerId).setValue(customer).addOnSuccessListener(this).addOnFailureListener(this);
 
+        saveLocalCustomer(customer);
+    }
+
+
+
+    public void  saveLocalCustomer(Customer customer){
+
+        Realm  realm = Realm.getDefaultInstance();
+
+
+        realm.beginTransaction();
+
+        // Todas las actualizaciones que se ejecuten son en este bloque de codigo.
+         Customer localCustomer = realm.copyToRealm(customer);
+
+
+        realm.commitTransaction();
+
+
+        getAllSmokeCustomers();
 
     }
 
+
+
+    public void getAllCustomers(){
+
+        Realm  realm = Realm.getDefaultInstance();
+
+        RealmResults<Customer> results  = realm.where(Customer.class).findAll();
+
+        for(Customer currentCustomer : results){
+            Toast.makeText(getActivity(), "Name: "+currentCustomer.getName(),Toast.LENGTH_LONG).show();
+
+        }
+
+    }
+
+
+
+    public void getAllSmokeCustomers(){
+
+        Realm  realm = Realm.getDefaultInstance();
+
+        RealmResults<Customer> results  = realm.where(Customer.class).equalTo("willSmoke",true).findAll();
+
+        for(Customer currentCustomer : results){
+            Toast.makeText(getActivity(), "Name: "+currentCustomer.getName(),Toast.LENGTH_LONG).show();
+
+        }
+
+    }
+
+
+
     @Override
     public void onFailure(@NonNull Exception e) {
+
+
+        Toast.makeText(getActivity(),"Sucedio un error, verifica tu conexión",Toast.LENGTH_LONG).show();
 
     }
 

@@ -1,6 +1,9 @@
 package mx.mobilestudio.eaat.model;
 
-public class Customer {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class Customer extends RealmObject {
 
     public String name;
     public String lastName;
